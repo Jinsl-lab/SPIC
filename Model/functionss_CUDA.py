@@ -3134,7 +3134,7 @@ class TrainerExe(object):
     def train(self, model, train_loader,
               num_epochs, learning_rate,device, weight_decay:1e-6):
         model.to(device)
-        model.train()
+        model.eval()
 
 
         self.learning_rate = learning_rate
