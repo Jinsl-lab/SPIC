@@ -26,7 +26,7 @@ def Wrapper(n_neighbors,local_connectivity,n_components,spread,min_dist,
         for ind2 in np.arange(ind1 + 1, len(flagged)):
             subset = (ind1, ind2)
             # collapse into a single object and run a PCA
-            adata = flagged[ind1].concatenate(flagged[ind2], join='inner') #保留共有的列
+            adata = flagged[ind1].concatenate(flagged[ind2], join='inner') 
             sc.tl.pca(adata,n_comps = n_comps)
 
             X_pca = adata.obsm['X_pca'].copy()
