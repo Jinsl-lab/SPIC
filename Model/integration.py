@@ -109,14 +109,13 @@ def Integration(adatas, use_reps,n_epochs ,
             sc. pp.scale(flagged[-1])
         flagged[-1].obs['multimap_index'] = i
 
-    # call the wrapper. returns (params, connectivities, embedding), with embedding optional
+
     import wrapper
     mmp =wrapper.Wrapper(n_neighbors,local_connectivity,n_components,spread,min_dist,n_comps=n_comps,
                          n_epochs=n_epochs,flagged=flagged, use_reps=use_reps, embedding=embedding,
-                         seed=seed ,**kwargs)#,
-    # make one happy collapsed object and shove the stuff in correct places
-    # outer join to capture as much gene information as possible for annotation
-    adata = anndata.concat(adatas, join='outer') #保留所有特征
+                         seed=seed ,**kwargs)
+
+    adata = anndata.concat(adatas, join='outer') 
     if embedding:
         adata.obsm['X_multimap'] = mmp[2]
         adata.uns['sc_embedding'] = mmp[3]
