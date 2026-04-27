@@ -3167,7 +3167,7 @@ class TrainerExe(object):
 
 
 def Predict_cord(data_test, model, location_data=None):
-    # testdata= (data_test.X.A if issparse(data_test.X) else data_test.X)
+    
     testdata = data_test
     if location_data is None:
         location_data = pd.DataFrame(np.ones((data_test.shape[0],2)), columns = ["psudo1", "psudo2"])
@@ -3176,11 +3176,10 @@ def Predict_cord(data_test, model, location_data=None):
     vdata_rs = np.swapaxes(vdatax, 1, 2)
     DataVal = wrap_gene_location(vdata_rs, location_data)
     Val_loader= torch.utils.data.DataLoader(DataVal, batch_size=1)
-    #
+
     cord = report_prop_method_sc(model, data_test = data_test,
                         Val_loader = Val_loader)
-    # data_test.obs["x_cord_pred"] = cord[:,0]
-    # data_test.obs["y_cord_pred"] = cord[:,1]
+
     return cord
 
 def seed_worker(worker_id):
