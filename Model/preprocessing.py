@@ -58,10 +58,10 @@ def preprocess(sc_adata,
 
     if normalize:
         sc.pp.normalize_total(sc_adata, target_sum=1e4)
-        sc.pp.log1p(sc_adata) # sc_adata
+        sc.pp.log1p(sc_adata)
 
         sc.pp.normalize_total(st_adata, target_sum=1e4)
-        sc.pp.log1p(st_adata) # sc_adata
+        sc.pp.log1p(st_adata)
 
     sc_adata.raw = sc_adata # Save the raw data
     st_adata.raw = st_adata
