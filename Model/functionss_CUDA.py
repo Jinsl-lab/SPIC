@@ -3309,19 +3309,13 @@ def hitnumber_evaluation(pred_coord, true_coord, k=10):
 
 
 def calculate_euclidean_distances(pred_coords, true_coords):
-        """
-        计算预测坐标集与真实坐标集之间的欧氏距离。
-        :param pred_coords: 预测坐标集，形如 [(x1, y1), (x2, y2), ...]
-        :param true_coords: 真实坐标集，形如 [(x1, y1), (x2, y2), ...]
-        :return: 每对坐标点之间的欧氏距离列表
-        """
-        # 确保两个数据集的长度一致
-        if len(pred_coords) != len(true_coords):
-            raise ValueError("预测坐标集和真实坐标集的长度必须一致")
 
-        distances = []
-        for pred, true in zip(pred_coords, true_coords):
-            dist = np.sqrt((pred[0] - true[0]) ** 2 + (pred[1] - true[1]) ** 2)
-            distances.append(dist)
+    if len(pred_coords) != len(true_coords):
+        raise ValueError("Predicted and true coordinate sets must have equal length")
 
-        return distances
+    distances = []
+    for pred, true in zip(pred_coords, true_coords):
+        dist = np.sqrt((pred[0] - true[0]) ** 2 + (pred[1] - true[1]) ** 2)
+        distances.append(dist)
+
+    return distances
