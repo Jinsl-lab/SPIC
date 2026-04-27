@@ -2497,7 +2497,7 @@ def rdist(x, y):
 #########################################################################################
 @numba.njit
 def gaussian_kernel(x, y, sigma):
-    """计算高斯核 k(x, y)"""
+
     dist_squared = rdist(x, y)
     return np.exp(-dist_squared / (2 * sigma ** 2))
 
@@ -2518,7 +2518,7 @@ def _optimize_layout_euclidean_single_epoch_with_mmd(
         epoch_of_next_negative_sample,
         epoch_of_next_sample,
         n,
-        sigma=1.0,  # MMD 高斯核参数
+        sigma=1.0, 
 ):
 
 
@@ -2538,7 +2538,7 @@ def _optimize_layout_euclidean_single_epoch_with_mmd(
             else:
                 grad_coeff = 0.0
 
-            # 计算 MMD 梯度（正样本对）
+           
             k_pos = gaussian_kernel(current, other, sigma)
             mmd_grad_pos = k_pos * (other - current) / sigma ** 2
 
@@ -2547,11 +2547,11 @@ def _optimize_layout_euclidean_single_epoch_with_mmd(
                 grad_d = clip(grad_d)
                 current[d] += grad_d * alpha
                 if move_other:
-                    other[d] -= grad_d * alpha  # 对称更新
+                    other[d] -= grad_d * alpha  
 
             epoch_of_next_sample[i] += epochs_per_sample[i]
 
-            # 负样本对
+            
             n_neg_samples = int(
                 (n - epoch_of_next_negative_sample[i]) / epochs_per_negative_sample[i]
             )
@@ -2570,9 +2570,9 @@ def _optimize_layout_euclidean_single_epoch_with_mmd(
                 else:
                     grad_coeff = 0.0
 
-                # 计算 MMD 梯度（负样本对）
+                
                 k_neg = gaussian_kernel(current, other, sigma)
-                mmd_grad_neg = -k_neg * (other - current) / sigma ** 2  # 负样本推远
+                mmd_grad_neg = -k_neg * (other - current) / sigma ** 2  
 
                 for d in range(dim):
                     if grad_coeff > 0.0:
@@ -3192,13 +3192,13 @@ import random
 
 def Fit_cord (data_train, out_features,location_data, hidden_dims, num_epochs, batch_size,
               initial_learning_rate, seednum, dropout, weight_decay, device):
-    #
+  
     random.seed(seednum)
     torch.manual_seed(seednum)
     np.random.seed(seednum)
     g = torch.Generator()
     g.manual_seed(seednum)
-    #
+
     if location_data is None:
         location_data = data_train.obs
     #traindata = (data_train.X.A if issparse(data_train.X) else data_train.X)
@@ -3213,9 +3213,8 @@ def Fit_cord (data_train, out_features,location_data, hidden_dims, num_epochs, b
 
     DNNmodel = DNN1(in_channels=DataTra[1][0].shape[0], hidden_dims=hidden_dims, out_features=out_features,dropout=dropout)
     DNNmodel = DNNmodel.float()
-    # DNNmodel = MultiTaskModel(input_dim=DataTra[1][0].shape[0], hidden_dims=hidden_dims,dropout=dropout)
 
-    #
+    
     CoOrg = TrainerExe()
     CoOrg.train(model=DNNmodel, train_loader=t_loader, num_epochs=num_epochs, learning_rate=initial_learning_rate,
                weight_decay=weight_decay,device=device)
