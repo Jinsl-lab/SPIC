@@ -3,3 +3,11 @@ SPIC is a deep learning framework designed for recovering spatial context of sin
 <p align="center">
   <img src="overview.png" width="850">
 </p>
+
+## Installation
+
+The required environment can be created using:
+
+```bash
+conda env create -f environment.yml
+conda activate SPIC
