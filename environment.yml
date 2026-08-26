@@ -1,0 +1,17 @@
+name: SPIC
+channels:
+  - conda-forge
+  - tensorflow
+  - defaults
+dependencies:
+  - leidenalg
+  - python-igraph
+  - scanpy
+  - pytorch
+  - pytorch-cuda=12.4
+  - torchaudio
+  - torchvision
+  - notebook
+  - omnipath
+  - openpyxl
+
